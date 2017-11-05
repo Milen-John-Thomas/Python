@@ -1,8 +1,8 @@
 import subprocess,os,time
 
 def main():
-        val=0
-        subprocess.call("top -b -n 1 | sed -n '7,$p' |  awk '{print $1,$2,$4,$9,$12}' | grep '%s\.[[:digit:]]' > top_result.txt" %val,shell=True)
+        val=10
+        subprocess.call("top -b -n 3 | sed -n '7,$p' |  awk '{print $1,$2,$4,$9,$12}' | grep '%s[[:digit:]]\.[[:digit:]]' > top_result.txt" %(val/10),shell=True)
         f_cat=subprocess.Popen("cat top_result.txt",shell=True,stdout=subprocess.PIPE)
         count=subprocess.Popen("wc -l", shell=True,stdin=f_cat.stdout,stdout=subprocess.PIPE)
         print("Number of processes is {0}" .format(count.communicate()[0].decode()))
@@ -29,7 +29,6 @@ def main():
                 os.system("clear")
         print("Completed")
         f.close()
-
 
 if __name__=='__main__':
         main()
